@@ -28,6 +28,9 @@ public class DataGenerator {
     }
 
     public static void createProduct() {
-        Product product1 = new Product(UUID.randomUUID(),"XBOX",399.99,10, StaticConstants.CATEGORY_MAP.get(0).getId());
+        Product product1 =
+                new Product(UUID.randomUUID(),"XBOX",399.99,10, StaticConstants.CATEGORY_MAP.get(0).getId());
+
+        StaticConstants.PRODUCT_LIST.add(product1);
     }
 }
