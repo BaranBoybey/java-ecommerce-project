@@ -3,6 +3,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 @Getter
 @AllArgsConstructor
@@ -12,7 +13,7 @@ public class Product {
     private String name;
     private double price;
     private int remainingStock;
-    private Category category;
+    private UUID categoryId;
 
 
 }
