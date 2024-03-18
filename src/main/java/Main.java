@@ -1,3 +1,5 @@
+import category.Category;
+
 import java.util.Scanner;
 
 public class Main {
@@ -34,7 +36,9 @@ public class Main {
             switch (menuSelection) {
                 case 1:
                     System.out.println("List categories selected");
-                    System.out.println(StaticConstants.CATEGORY_MAP);
+                    for (Category category : StaticConstants.CATEGORY_MAP) {
+                        System.out.println(category.generateCategoryCode() + "name:  " + category.getName());
+                    }
                     break;
                 case 2:
                     System.out.println("List products selected");
