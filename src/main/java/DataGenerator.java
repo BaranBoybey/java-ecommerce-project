@@ -4,6 +4,8 @@ import category.Category;
 import category.Electronic;
 import category.Furniture;
 import category.SkinCare;
+import discount.AmountBasedDiscount;
+import discount.Discount;
 
 import java.util.UUID;
 
@@ -41,4 +43,11 @@ public class DataGenerator {
 
         StaticConstants.CUSTOMER_BALANCE_LIST.add(balance1);
     }
+
+    public static void createDiscount() {
+        Discount discount = new AmountBasedDiscount(UUID.randomUUID(), "Buy 250 get 50 dollar discount", 250.00);
+        StaticConstants.DISCOUNT_LIST.add(discount);
+    }
+
+
 }
