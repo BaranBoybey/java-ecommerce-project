@@ -1,3 +1,5 @@
+import balance.Balance;
+import balance.CustomerBalance;
 import category.Category;
 import category.Electronic;
 import category.Furniture;
@@ -29,8 +31,14 @@ public class DataGenerator {
 
     public static void createProduct() {
         Product product1 =
-                new Product(UUID.randomUUID(),"XBOX",399.99,10, StaticConstants.CATEGORY_MAP.get(0).getId());
+                new Product(UUID.randomUUID(),"XBOX",399.99,10, StaticConstants.CATEGORY_MAP.get(0).getId()); //Assumming I know that Electronic is at index 0.
 
         StaticConstants.PRODUCT_LIST.add(product1);
+    }
+
+    public static void createBalance() {
+        Balance balance1 = new CustomerBalance(StaticConstants.CUSTOMER_LIST.get(1).getId(), 150.00); //Assuming I know customer ID
+
+        StaticConstants.CUSTOMER_BALANCE_LIST.add(balance1);
     }
 }
