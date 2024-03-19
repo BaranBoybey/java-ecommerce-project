@@ -1,5 +1,6 @@
 import balance.Balance;
 import balance.CustomerBalance;
+import balance.GiftCardBalance;
 import category.Category;
 import category.Electronic;
 import category.Furniture;
@@ -40,8 +41,10 @@ public class DataGenerator {
 
     public static void createBalance() {
         Balance balance1 = new CustomerBalance(StaticConstants.CUSTOMER_LIST.get(1).getId(), 150.00); //Assuming I know customer ID
+        Balance giftCardBalance = new GiftCardBalance(StaticConstants.CUSTOMER_LIST.get(0).getId(),100.00);
 
         StaticConstants.CUSTOMER_BALANCE_LIST.add(balance1);
+        StaticConstants.CUSTOMER_BALANCE_LIST.add(giftCardBalance);
     }
 
     public static void createDiscount() {

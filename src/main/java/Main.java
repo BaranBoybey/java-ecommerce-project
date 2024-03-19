@@ -69,9 +69,26 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("Add balance selected");
-                    for (Balance balance : StaticConstants.CUSTOMER_BALANCE_LIST) {
-                        //balance.addBalance();
+                    System.out.println("which account would you like to add");
+                    CustomerBalance customerBalanceAccount = findCustomerBalance(customer.getId());
+                    GiftCardBalance giftCardBalanceAccount = findGiftCardBalance(customer.getId());
+                    System.out.println("type 1 for customer balance: " + customerBalanceAccount.getBalance());
+                    System.out.println("type 2 for gift card balance: " + giftCardBalanceAccount.getBalance());
+                    int accountSelection = scanner.nextInt();
+                    System.out.println("how much would you like to add?");
+                    double additionalAmount = scanner.nextInt();
+                    switch (accountSelection){
+                        case 1:
+                            customerBalanceAccount.addBalance(additionalAmount);
+                            System.out.println("new customer balance: $" + customerBalanceAccount.getBalance());
+                            break;
+                        case 2:
+                            giftCardBalanceAccount.addBalance(additionalAmount);
+                            System.out.println("new giftcard balance: $" + giftCardBalanceAccount.getBalance());
+                            break;
                     }
+
+
                     break;
                 case 5:
                     System.out.println("Place an order selected");
@@ -100,7 +117,7 @@ public class Main {
 
     private static String[] prepareMenuOptions() {
         return new String[] {
-                "List categories", "List products", "List discounts", "see balance", "add balance" +
+                "List categories", "List products", "List discounts", "see balance", "add balance",
                 "place an order", "see cart", "see order details", "see your address", "close app"
         };
     }
