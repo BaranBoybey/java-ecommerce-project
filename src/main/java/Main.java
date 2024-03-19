@@ -4,6 +4,8 @@ import balance.GiftCardBalance;
 import category.Category;
 import discount.Discount;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -27,6 +29,8 @@ public class Main {
         System.out.println("===>");
 
         Customer customer = StaticConstants.CUSTOMER_LIST.get(scanner.nextInt());
+
+        Cart cart = new Cart(customer);
 
         while (true) {
 
@@ -92,6 +96,27 @@ public class Main {
                     break;
                 case 5:
                     System.out.println("Place an order selected");
+                    Map<Product, Integer> map = new HashMap<>();
+                    cart.setProductMap(map);
+                    while (true) {
+                        System.out.println("which product would you like to add to your card. to leave type exit");
+                        for (Product product : StaticConstants.PRODUCT_LIST) {
+                            System.out.println(product.getName() + " $" + product.getPrice() + " stock: " + product.getRemainingStock() +"\n " +
+                                   "delivery due date: " + product.getDeliveryDueDate());
+                        }
+                        String productId = scanner.next();
+                        Product product = Product.findProductById(productId);
+                        if (!putItemToCartIfStockAvailable(cart, product)){
+                            System.out.println("stuck is insufficient");
+
+                        }
+
+                        System.out.println("do you want to add more products y/n");
+                        String decision = scanner.next();
+                        if (!decision.equals("y")) {
+                            break;
+                        }
+                    }
                     break;
                 case 6:
                     System.out.println("See cart selected");
@@ -114,6 +139,26 @@ public class Main {
 
         }
     }
+
+    private static boolean putItemToCartIfStockAvailable(Cart cart, Product product) {
+        System.out.println("please provide product count");
+        Scanner scanner = new Scanner(System.in);
+        int count = scanner.nextInt();
+        Integer cartCount = cart.getProductMap().get(product);
+
+        if (cartCount != null && product.getRemainingStock() > cartCount + count){
+            cart.getProductMap().put(product, cartCount + count);
+            return true;
+        } else if (product.getRemainingStock() > count) {
+            cart.getProductMap().put(product,count);
+            return true;
+        }
+        return false;
+    }
+
+
+
+
 
     private static String[] prepareMenuOptions() {
         return new String[] {
