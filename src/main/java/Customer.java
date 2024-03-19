@@ -13,7 +13,6 @@ public class Customer {
     private UUID id;
     private String username, email;
     private List<Address> address;
-    private Balance balance;
 
     public Customer(UUID id, String username, String email, Address address) {
         this.id = id;
