@@ -25,14 +25,14 @@ public class Product {
         return null;
     }
 
-    static Product findProductById(String productId) {
+    static Product findProductById(String productId) throws Exception {
 
         for (Product product : StaticConstants.PRODUCT_LIST) {
             if (product.getId().toString().equals(productId)) {
                 return product;
             }
         }
-        return null;
+        throw new Exception("Product not found");
     }
 
 

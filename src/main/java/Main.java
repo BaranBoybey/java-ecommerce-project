@@ -65,32 +65,42 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("See balance selected");
-                    CustomerBalance customerBalance = findCustomerBalance(customer.getId());
-                    GiftCardBalance giftCardBalance = findGiftCardBalance(customer.getId());
-                    double totalBalance = customerBalance.getBalance() + giftCardBalance.getBalance();
-                    System.out.println("customer balance: " + customerBalance.getBalance());
-                    System.out.println("giftCardBalance: " + giftCardBalance.getBalance());
-                    break;
+                    try {
+                        CustomerBalance customerBalance = findCustomerBalance(customer.getId());
+                        GiftCardBalance giftCardBalance = findGiftCardBalance(customer.getId());
+                        double totalBalance = customerBalance.getBalance() + giftCardBalance.getBalance();
+                        System.out.println("customer balance: " + customerBalance.getBalance());
+                        System.out.println("giftCardBalance: " + giftCardBalance.getBalance());
+                        break;
+                    } catch (Exception e) {
+                        throw new RuntimeException("Balance(s) not found!");
+                    }
+
                 case 4:
                     System.out.println("Add balance selected");
                     System.out.println("which account would you like to add");
-                    CustomerBalance customerBalanceAccount = findCustomerBalance(customer.getId());
-                    GiftCardBalance giftCardBalanceAccount = findGiftCardBalance(customer.getId());
-                    System.out.println("type 1 for customer balance: " + customerBalanceAccount.getBalance());
-                    System.out.println("type 2 for gift card balance: " + giftCardBalanceAccount.getBalance());
-                    int accountSelection = scanner.nextInt();
-                    System.out.println("how much would you like to add?");
-                    double additionalAmount = scanner.nextInt();
-                    switch (accountSelection){
-                        case 1:
-                            customerBalanceAccount.addBalance(additionalAmount);
-                            System.out.println("new customer balance: $" + customerBalanceAccount.getBalance());
-                            break;
-                        case 2:
-                            giftCardBalanceAccount.addBalance(additionalAmount);
-                            System.out.println("new giftcard balance: $" + giftCardBalanceAccount.getBalance());
-                            break;
+                    try {
+                        CustomerBalance customerBalanceAccount = findCustomerBalance(customer.getId());
+                        GiftCardBalance giftCardBalanceAccount = findGiftCardBalance(customer.getId());
+                        System.out.println("type 1 for customer balance: " + customerBalanceAccount.getBalance());
+                        System.out.println("type 2 for gift card balance: " + giftCardBalanceAccount.getBalance());
+                        int accountSelection = scanner.nextInt();
+                        System.out.println("how much would you like to add?");
+                        double additionalAmount = scanner.nextInt();
+                        switch (accountSelection){
+                            case 1:
+                                customerBalanceAccount.addBalance(additionalAmount);
+                                System.out.println("new customer balance: $" + customerBalanceAccount.getBalance());
+                                break;
+                            case 2:
+                                giftCardBalanceAccount.addBalance(additionalAmount);
+                                System.out.println("new giftcard balance: $" + giftCardBalanceAccount.getBalance());
+                                break;
+                        }
+                    } catch (Exception e) {
+                        throw new RuntimeException("Balance(s) not found!");
                     }
+
 
 
                     break;
@@ -105,21 +115,28 @@ public class Main {
                                    "delivery due date: " + product.getDeliveryDueDate());
                         }
                         String productId = scanner.next();
-                        Product product = Product.findProductById(productId);
-                        if (!putItemToCartIfStockAvailable(cart, product)){
-                            System.out.println("stuck is insufficient");
+                        try {
+                            Product product = Product.findProductById(productId);
+                            if (!putItemToCartIfStockAvailable(cart, product)){
+                                System.out.println("stuck is insufficient");
+                                continue;
+                            }
 
+                            System.out.println("do you want to add more products y/n");
+                            String decision = scanner.next();
+                            if (!decision.equals("y")) {
+                                break;
+                            }
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
                         }
 
-                        System.out.println("do you want to add more products y/n");
-                        String decision = scanner.next();
-                        if (!decision.equals("y")) {
-                            break;
-                        }
+
                     }
-                    break;
+
                 case 6:
                     System.out.println("See cart selected");
+
                     break;
                 case 7:
                     System.out.println("See order details selected");
@@ -167,10 +184,13 @@ public class Main {
         };
     }
 
-    private static CustomerBalance findCustomerBalance(UUID uuid) {
+    private static CustomerBalance findCustomerBalance(UUID uuid) throws Exception {
         for (Balance balance : StaticConstants.CUSTOMER_BALANCE_LIST) {
             if (balance.getCustomerId().toString().equals(uuid.toString())){
                 return (CustomerBalance) balance;
+            }
+            else {
+                throw new Exception("Customer balance doesn't exist");
             }
         }
         CustomerBalance customerBalance = new CustomerBalance(uuid,0.0);
@@ -178,10 +198,13 @@ public class Main {
         return customerBalance;
     }
 
-    private static GiftCardBalance findGiftCardBalance(UUID uuid) {
+    private static GiftCardBalance findGiftCardBalance(UUID uuid) throws Exception {
         for (Balance balance : StaticConstants.GIFT_CARD_BALANCE_LIST) {
             if (balance.getCustomerId().toString().equals(uuid.toString())) {
                 return (GiftCardBalance) balance;
+            }
+            else {
+                throw new Exception("Gift card balance doesn't exist");
             }
         }
         GiftCardBalance giftCardBalance = new GiftCardBalance(uuid, 0.0);
