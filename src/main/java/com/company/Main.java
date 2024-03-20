@@ -133,16 +133,22 @@ public class Main {
                             throw new RuntimeException(e);
                         }
 
-                        System.out.println("There are available discounts!");
+                        System.out.println("There are available discounts! See if they apply");
                         for (Discount discount : StaticConstants.DISCOUNT_LIST) {
                             System.out.println( "discount name: " + discount.getName() + "discount Id: " +discount.getId());
                         }
+                        System.out.println("enter preffered discount Id, or no (n): ");
                         String discountId = scanner.next();
-                        try {
-                            Discount discount = findDiscountById(discountId);
+                        if (!discountId.equals("n")) {
+                            try {
+                                Discount discount = findDiscountById(discountId);
+                                if (discount.IsDiscountApplicableToCart(cart)) {
+                                    cart.setDiscountId(discount.getId());
+                                }
+                            } catch (Exception e) {
+                                throw new RuntimeException("discount not found!");
+                            }
                         }
-
-
                     }
 
                 case 6:
