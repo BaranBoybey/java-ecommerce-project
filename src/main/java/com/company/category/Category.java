@@ -1,4 +1,4 @@
-package category;
+package com.company.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

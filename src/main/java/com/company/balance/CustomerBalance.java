@@ -1,4 +1,4 @@
-package balance;
+package com.company.balance;
 
 import java.util.UUID;
 

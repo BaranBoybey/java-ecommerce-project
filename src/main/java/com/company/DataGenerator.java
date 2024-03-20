@@ -1,13 +1,15 @@
-import balance.Balance;
-import balance.CustomerBalance;
-import balance.GiftCardBalance;
-import category.Category;
-import category.Electronic;
-import category.Furniture;
-import category.SkinCare;
-import discount.AmountBasedDiscount;
-import discount.Discount;
-import discount.RateBasedDiscount;
+package com.company;
+
+import com.company.balance.Balance;
+import com.company.balance.CustomerBalance;
+import com.company.balance.GiftCardBalance;
+import com.company.category.Category;
+import com.company.category.Electronic;
+import com.company.category.Furniture;
+import com.company.category.SkinCare;
+import com.company.discount.AmountBasedDiscount;
+import com.company.discount.Discount;
+import com.company.discount.RateBasedDiscount;
 
 import java.util.UUID;
 

@@ -1,8 +1,10 @@
-import balance.Balance;
-import balance.CustomerBalance;
-import balance.GiftCardBalance;
-import category.Category;
-import discount.Discount;
+package com.company;
+
+import com.company.balance.Balance;
+import com.company.balance.CustomerBalance;
+import com.company.balance.GiftCardBalance;
+import com.company.category.Category;
+import com.company.discount.Discount;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -131,6 +133,15 @@ public class Main {
                             throw new RuntimeException(e);
                         }
 
+                        System.out.println("There are available discounts!");
+                        for (Discount discount : StaticConstants.DISCOUNT_LIST) {
+                            System.out.println( "discount name: " + discount.getName() + "discount Id: " +discount.getId());
+                        }
+                        String discountId = scanner.next();
+                        try {
+                            Discount discount = findDiscountById(discountId);
+                        }
+
 
                     }
 
@@ -210,5 +221,14 @@ public class Main {
         GiftCardBalance giftCardBalance = new GiftCardBalance(uuid, 0.0);
         StaticConstants.GIFT_CARD_BALANCE_LIST.add(giftCardBalance);
         return giftCardBalance;
+    }
+
+    private static Discount findDiscountById(String discountId) throws Exception {
+        for (Discount discount : StaticConstants.DISCOUNT_LIST) {
+            if (discount.getId().toString().equals(discountId)) {
+                return discount;
+            }
+        }
+        throw new Exception("Discount doesn't exist");
     }
 }

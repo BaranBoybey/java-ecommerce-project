@@ -1,4 +1,5 @@
-import balance.Balance;
+package com.company;
+
 import lombok.Getter;
 import lombok.ToString;
 

@@ -1,9 +1,9 @@
-package category;
+package com.company.category;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Furniture extends Category{
+public class Furniture extends Category {
     public Furniture(UUID id, String name) {
         super(id, name);
     }

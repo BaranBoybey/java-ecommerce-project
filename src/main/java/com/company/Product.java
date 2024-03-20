@@ -1,4 +1,6 @@
-import category.Category;
+package com.company;
+
+import com.company.category.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

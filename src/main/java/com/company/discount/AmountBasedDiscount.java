@@ -1,4 +1,4 @@
-package discount;
+package com.company.discount;
 
 import lombok.Getter;
 

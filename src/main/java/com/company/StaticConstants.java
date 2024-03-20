@@ -1,6 +1,8 @@
-import balance.Balance;
-import category.Category;
-import discount.Discount;
+package com.company;
+
+import com.company.balance.Balance;
+import com.company.category.Category;
+import com.company.discount.Discount;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package balance;
+package com.company.balance;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

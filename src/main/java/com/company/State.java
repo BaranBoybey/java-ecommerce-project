@@ -1,3 +1,5 @@
+package com.company;
+
 public enum State {
     ALABAMA,
     ALASKA,
