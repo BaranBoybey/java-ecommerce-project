@@ -1,5 +1,7 @@
 package com.company.category;
 
+import com.company.order.Order;
+
 import java.time.LocalDate;
 import java.util.UUID;
 

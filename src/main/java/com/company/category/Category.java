@@ -1,5 +1,6 @@
 package com.company.category;
 
+import com.company.order.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
