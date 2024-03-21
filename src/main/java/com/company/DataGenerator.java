@@ -11,7 +11,11 @@ import com.company.discount.AmountBasedDiscount;
 import com.company.discount.Discount;
 import com.company.discount.RateBasedDiscount;
 import com.company.discount.ReferenceCodeDiscount;
+import com.company.order.Order;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class DataGenerator {
@@ -66,6 +70,31 @@ public class DataGenerator {
         String description2 = "Spend over " + discount2.getThresholdAmount() + " with a reference code get " + ((ReferenceCodeDiscount) discount2).getRateAmount() + "% off";
         discount2.setName(description2);
         StaticConstants.DISCOUNT_LIST.add(discount2);
+    }
+
+    public static void createOrder() {
+
+        /* SAMPLE PRODUCTS AND ORDER */
+
+        Set<Product> products = new HashSet<>();
+        Product product1 = new Product(UUID.randomUUID(),"Product 1", 1.0, 5, UUID.randomUUID());
+        Product product2 = new Product(UUID.randomUUID(), "Product 2", 2.0, 10, UUID.randomUUID());
+        products.add(product1);
+        products.add(product2);
+
+        Order order = new Order(
+                UUID.randomUUID(),            // Order ID
+                LocalDateTime.now(),         // Order date
+                30.00,                        // Cart total amount
+                25.00,                        // Paid amount
+                5.00,                         // Discount amount
+                UUID.randomUUID(),           // Customer ID
+                "Pending",                   // Order status
+                products                      // Product list
+        );
+
+        /* SAMPLE PRODUCTS AND ORDER */
+
     }
 
 
