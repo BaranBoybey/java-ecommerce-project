@@ -19,6 +19,6 @@ public class RateBasedDiscount extends Discount{
             Double discountAmount = (rateAmount / 100) * amount;
             return amount - discountAmount;
         }
-        throw new Exception("discount couldn't applied");
+        throw new Exception("discount couldn't applied, doesn't meet requirement");
     }
 }

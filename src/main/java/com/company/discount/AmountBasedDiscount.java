@@ -11,6 +11,7 @@ public class AmountBasedDiscount extends Discount{
     public AmountBasedDiscount(UUID id, String name, Double thresholdAmount, Double discountAmount) {
 
         super(id, name, thresholdAmount);
+        this.discountAmount = discountAmount;
     }
 
     @Override
@@ -22,6 +23,6 @@ public class AmountBasedDiscount extends Discount{
             }
             return amount - discountAmount;
         }
-        throw new Exception("discount couldn't applied");
+        throw new Exception("discount couldn't applied, doesn't meet requirement");
     }
 }

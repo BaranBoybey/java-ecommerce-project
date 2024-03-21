@@ -19,5 +19,9 @@ public abstract class Discount {
         return cart.calculateCartTotalAmount() >= thresholdAmount;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public abstract Double CartAmountAfterDiscountApplied(Double amount) throws Exception;
 }

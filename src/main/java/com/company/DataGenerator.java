@@ -10,6 +10,7 @@ import com.company.category.SkinCare;
 import com.company.discount.AmountBasedDiscount;
 import com.company.discount.Discount;
 import com.company.discount.RateBasedDiscount;
+import com.company.discount.ReferenceCodeDiscount;
 
 import java.util.UUID;
 
@@ -17,9 +18,9 @@ public class DataGenerator {
 
     public static void createCustomer() {
         Address address1 = new Address(State.ILLINOIS, "Springfield", "12345", "123 main st");
-        Customer customer1 = new Customer(UUID.randomUUID(), "John Doe", "john@example.com", address1);
+        Customer customer1 = new Customer(UUID.randomUUID(), null, "John Doe", "john@example.com", address1);
 
-        Customer customer2 = new Customer(UUID.randomUUID(), "Jane Smith", "jane@example.com"); // Constructor without address
+        Customer customer2 = new Customer(UUID.randomUUID(), customer1.getId(),"Jane Smith", "jane@example.com"); // Constructor without address
 
         StaticConstants.CUSTOMER_LIST.add(customer1);
         StaticConstants.CUSTOMER_LIST.add(customer2);
@@ -51,10 +52,20 @@ public class DataGenerator {
     }
 
     public static void createDiscount() {
-        Discount discount = new AmountBasedDiscount(UUID.randomUUID(), "Buy 250 get 50 dollar discount", 250.00, 50.0);
+        Discount discount = new AmountBasedDiscount(UUID.randomUUID(), null, 250.00, 50.0);
+        String description = "Buy $" + discount.getThresholdAmount() + " get $" + ((AmountBasedDiscount) discount).getDiscountAmount() + " discount";
+        discount.setName(description);
         StaticConstants.DISCOUNT_LIST.add(discount);
 
-        Discount discount1 = new RateBasedDiscount(UUID.randomUUID(), "10% DISCOUNT WHEN SPENDING $100", 100.00, 10.00);
+        Discount discount1 = new RateBasedDiscount(UUID.randomUUID(), null, 100.00, 10.00);
+        String description1 = ((RateBasedDiscount) discount1).getRateAmount() + "% DISCOUNT WHEN SPENDING $" + discount1.getThresholdAmount();
+        discount1.setName(description1);
+        StaticConstants.DISCOUNT_LIST.add(discount1);
+
+        Discount discount2 = new ReferenceCodeDiscount(UUID.randomUUID(),null, 25.0, 25.0);
+        String description2 = "Spend over " + discount2.getThresholdAmount() + " with a reference code get " + ((ReferenceCodeDiscount) discount2).getRateAmount() + "% off";
+        discount2.setName(description2);
+        StaticConstants.DISCOUNT_LIST.add(discount2);
     }
 
 
