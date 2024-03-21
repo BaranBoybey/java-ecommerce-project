@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
@@ -23,4 +24,17 @@ public class Order {
     private String orderStatus;
     private Set<Product> productList;
 
+    public LocalDate orderDeliveryDate(Order order) {
+        LocalDate maxDeliveryDate = LocalDate.MIN;
+
+        for (Product product : order.getProductList()) {
+            LocalDate deliveryDueDate = product.getDeliveryDueDate();
+            if (deliveryDueDate.isAfter(maxDeliveryDate)) {
+                maxDeliveryDate = deliveryDueDate;
+            }
+        }
+
+        return maxDeliveryDate;
+
+    }
 }

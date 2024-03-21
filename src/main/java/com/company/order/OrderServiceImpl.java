@@ -66,18 +66,4 @@ public class OrderServiceImpl implements OrderService {
         }
         throw new Exception("Discount couldn't found");
     }
-
-    private LocalDate orderDeliveryDate(Order order) {
-        LocalDate maxDeliveryDate = LocalDate.MIN;
-
-        for (Product product : order.getProductList()) {
-            LocalDate deliveryDueDate = product.getDeliveryDueDate();
-            if (deliveryDueDate.isAfter(maxDeliveryDate)) {
-                maxDeliveryDate = deliveryDueDate;
-            }
-        }
-
-        return maxDeliveryDate;
-
-    }
 }
