@@ -14,7 +14,11 @@ public class RateBasedDiscount extends Discount{
     }
 
     @Override
-    public Double CartAmountAfterDiscountApplied(Double amount) {
-        return null;
+    public Double CartAmountAfterDiscountApplied(Double amount) throws Exception {
+        if (amount >= getThresholdAmount()) {
+            Double discountAmount = (rateAmount / 100) * amount;
+            return amount - discountAmount;
+        }
+        throw new Exception("discount couldn't applied");
     }
 }

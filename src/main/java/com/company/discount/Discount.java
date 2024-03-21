@@ -19,5 +19,5 @@ public abstract class Discount {
         return cart.calculateCartTotalAmount() >= thresholdAmount;
     }
 
-    public abstract Double CartAmountAfterDiscountApplied(Double amount);
+    public abstract Double CartAmountAfterDiscountApplied(Double amount) throws Exception;
 }

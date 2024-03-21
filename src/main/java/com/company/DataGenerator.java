@@ -51,7 +51,7 @@ public class DataGenerator {
     }
 
     public static void createDiscount() {
-        Discount discount = new AmountBasedDiscount(UUID.randomUUID(), "Buy 250 get 50 dollar discount", 250.00);
+        Discount discount = new AmountBasedDiscount(UUID.randomUUID(), "Buy 250 get 50 dollar discount", 250.00, 50.0);
         StaticConstants.DISCOUNT_LIST.add(discount);
 
         Discount discount1 = new RateBasedDiscount(UUID.randomUUID(), "10% DISCOUNT WHEN SPENDING $100", 100.00, 10.00);
