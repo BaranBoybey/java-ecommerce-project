@@ -17,7 +17,7 @@ public class ReferenceCodeDiscount extends Discount{
     }
 
     public boolean IsDiscountApplicableToCart(Customer customer, Cart cart) {
-        if (customer.getReferenceCode() != null && cart.calculateCartTotalAmount() >= 25) {
+        if (customer.getReferenceCode() != null && cart.calculateCartTotalAmount() >= 25 && !(customer.getId().equals(customer.getReferenceCode()))) {
             for (Customer eachCustomer : StaticConstants.CUSTOMER_LIST) {
                 if (eachCustomer.getId().toString().equals(customer.getReferenceCode().toString())) {
                     return true;
